@@ -5,7 +5,7 @@
     int count = 0;
     string text = Console.ReadLine() ?? "";
     char[] separator = {',', ' '};
-    string[] result = text.Split(separator, StringSplitOptions.None);
+    string[] result = text.Split(separator, StringSplitOptions.RemoveEmptyEntries);
     for (int i = 0; i < result.Length; i++)
     {
         if(result[i].Length <= 3){
@@ -28,11 +28,21 @@ void RecSelectMethod(string[] array, string[] temp, int a, int count)
     
 }
 
-void Print(string[] array)
+void Print(string[] array, string massage)
 {
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write($"{array[i]} ");
+    if(array.Length == 0){
+        Console.WriteLine("Массив строк не содержит элементов, включающих в себя от 1 до 3 символов");
+    } else {
+        Console.WriteLine(massage);
+        for (int i = 0; i < array.Length; i++)
+        {
+            if(i == array.Length - 1){
+                 Console.Write($"{array[i]}");
+            } else {
+                 Console.Write($"{array[i]},");
+            }
+           
+        }
     }
 }
 int value = 0;
@@ -40,4 +50,4 @@ int count = 0;
 (string[] getMassage, int size) = GoodEnterMass("Введите несколько строк, разделенные запятой или пробелом");
 string[] result = new string[size];
 RecSelectMethod(getMassage, result, value, count);
-Print(result);
+Print(result, "Массив строк содержит элементы, включающие в себя от 1 до 3 символов");
